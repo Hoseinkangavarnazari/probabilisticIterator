@@ -32,7 +32,7 @@ bool isItMatches(string packet, string iterator) {
 
 	bool flag = true;
 	for (int i = 0; i < packet.size(); i++) {
-		if (packet[i] == 1 && iterator[i] != 1) {
+		if  (packet[i] == '1' && iterator[i] != '1') {
 			flag = false;
 			break;
 		}
@@ -87,12 +87,13 @@ int main()
 	int symbols = 5;
 	int redundancy = 2;
 	int errorProbability = 50;
+	int testBound = 10000;
 
 
 
 
 	vector<string> partialPacketGenerated;
-	for (int i = 0; i < 10000; i++) {
+	for (int i = 0; i < testBound; i++) {
 		partialPacketGenerated.push_back(generateRandomString(symbols + redundancy, errorProbability));
 	}
 
