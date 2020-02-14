@@ -32,7 +32,7 @@ bool isItMatches(string packet, string iterator) {
 
 	bool flag = true;
 	for (int i = 0; i < packet.size(); i++) {
-		if  (packet[i] == '1' && iterator[i] != '1') {
+		if (packet[i] == '1' && iterator[i] != '1') {
 			flag = false;
 			break;
 		}
@@ -64,19 +64,21 @@ float oldAlgorithm(int k, int r, vector<string> partialPacketGenerated) {
 
 
 	for (int i = 0; i < partialPacketGenerated.size(); i++) {
-
-
-		while (true) {
+		iterator = originalIterator;
+		cout << endl << "Packet: " << i << endl;
+		do 
+		{
 			totalPermutation += 1;
 			if (isItMatches(partialPacketGenerated[i], iterator)) {
 				break;
 			}
-			prev_permutation(begin(iterator), end(iterator));
-		}
+			
+		} while (prev_permutation(begin(iterator), end(iterator)));
 	}
 
-	return 1;
 
+	float avgIteration = totalPermutation / partialPacketGenerated.size();
+	return avgIteration;
 }
 
 int main()
@@ -84,9 +86,9 @@ int main()
 
 	// initial Configuration
 
-	int symbols = 5;
-	int redundancy = 2;
-	int errorProbability = 50;
+	int symbols = 26;
+	int redundancy = 5;
+	int errorProbability = 12;
 	int testBound = 10000;
 
 
@@ -97,7 +99,7 @@ int main()
 		partialPacketGenerated.push_back(generateRandomString(symbols + redundancy, errorProbability));
 	}
 
-	oldAlgorithm(symbols, redundancy, partialPacketGenerated);
+	cout << "The old Algorithm iteration: " << oldAlgorithm(symbols, redundancy, partialPacketGenerated);
 
 
 	return 0;
